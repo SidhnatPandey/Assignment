@@ -1,15 +1,17 @@
 "use client";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import axios from "axios";
 
 export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const route = useRouter();
 
   const handleSignup = async () => {
     try {
-      const res = await axios.post("http://localhost:5000/signup", { email, password });
-      alert("Signup successful: " + res.data.uid);
+      const res = await axios.post("https://assignment-backend-android.onrender.com/signup", { email, password });
+      route.push("/login");
     } catch (err) {
       alert("Signup failed: " + err.response.data.error);
     }

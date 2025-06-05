@@ -1,14 +1,16 @@
 "use client";
 import { useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
   const [email, setEmail] = useState("");
+  const router = useRouter();
 
   const handleLogin = async () => {
     try {
-      const res = await axios.post("http://localhost:5000/login", { email });
-      alert("Login successful!");
+      const res = await axios.post("https://assignment-backend-android.onrender.com/login", { email });
+      router.push("/home");
     } catch (err) {
       alert("Login failed: " + err.response.data.error);
     }
