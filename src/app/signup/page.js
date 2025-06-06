@@ -6,14 +6,21 @@ import axios from "axios";
 export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const route = useRouter();
 
   const handleSignup = async () => {
     try {
+      setLoading(true);
       const res = await axios.post("https://assignment-backend-android.onrender.com/signup", { email, password });
+      if (res) {
+        alert("Api Done successfull");
+        setLoading(false);
+      }
       route.push("/login");
     } catch (err) {
       alert("Signup failed: " + err.response.data.error);
+      setLoading(false);
     }
   };
 
@@ -63,7 +70,7 @@ export default function Signup() {
   const buttonStyle = {
     width: "100%",
     padding: "12px",
-    backgroundColor: "#2563eb",
+    backgroundColor: loading ? "#9ca3af" : "#2563eb",
     color: "#ffffff",
     fontWeight: "600",
     borderRadius: "8px",
@@ -97,13 +104,18 @@ export default function Signup() {
           />
         </div>
         <button
-          onClick={handleSignup}
-          style={buttonStyle}
-          onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#1d4ed8")}
-          onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#2563eb")}
-        >
-          Sign Up
-        </button>
+        disabled={loading}
+        onClick={handleSignup}
+        style={buttonStyle}
+        onMouseOver={(e) => {
+          if (!loading) e.currentTarget.style.backgroundColor = "#1d4ed8";
+        }}
+        onMouseOut={(e) => {
+          if (!loading) e.currentTarget.style.backgroundColor = "#2563eb";
+        }}
+      >
+        {loading ? "Loading..." : "Sign Up"}
+      </button>
       </div>
     </div>
   );
