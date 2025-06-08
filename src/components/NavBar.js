@@ -1,9 +1,13 @@
 export default function NavBar() {
   const headerStyle = {
     width: "100%",
-    background: "linear-gradient(to right, #4facfe, #00f2fe)",
+    backgroundColor: "#2563eb",
     padding: "16px 0",
-    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+    boxShadow: "0 2px 8px rgba(37, 99, 235, 0.4)",
+    position: "fixed",
+    top: 0,
+    left: 0,
+    zIndex: 1000,
   };
 
   const containerStyle = {
@@ -16,11 +20,12 @@ export default function NavBar() {
   };
 
   const titleStyle = {
-    fontSize: "26px",
+    fontSize: "28px",
     fontWeight: "700",
-    color: "#ffffff",
+    color: "#f9fafb",
     fontFamily: "'Poppins', sans-serif",
-    letterSpacing: "1px",
+    letterSpacing: "1.5px",
+    textShadow: "0 1px 2px rgba(0,0,0,0.3)",
   };
 
   return (
